@@ -1,49 +1,47 @@
 package tunnel
 
-import (
-	"fmt"
-	"math/rand"
-)
+import "math/rand"
 
-// RandTunnel működése:
-// Vissza kell tudja adni, hogy mi van előre jobbra és balra
-// Kell tudjon választani, hogy az adott irányba mi van.
-// Lehet hogy újabb Tunnel van és lehet, hogy Room van.
-// Front a right és a left csak és kizárólag Room vagy Tunnel értéket vehet fel.
-// És minden hívásnál random dőljön el, hogy melyik irányba mit adunk vissza.
+type Tunnel interface {
+	GetFront() string
+	GetRight() string
+	GetLeft() string
+}
 
-func RandTunnel() (front, right, left string) {
+type tunnel struct {
+	front string
+	right string
+	left  string
+	y     int
+	x     int
+}
 
-	/*frontRand := rand.Intn(2)
-	if frontRand == 0 {
-		front = "room"
+func New(x int, y int) Tunnel {
 
-	} else {
-		front = "tunnel"
-	}
-	rightRand := rand.Intn(2)
-	if rightRand == 0 {
-		right = "room"
+	t := &tunnel{}
 
-	} else {
-		right = "tunnel"
-	}
-	leftRand := rand.Intn(2)
-	if leftRand == 0 {
-		left = "room"
+	t.front, t.right, t.left = t.randTunnel()
 
-	} else {
-		left = "tunnel"
-	}
-	fmt.Println(front, right, left)
-	return front, right, left*/
+	return t
 
+}
+
+func (t *tunnel) GetFront() string {
+	return t.front
+}
+
+func (t *tunnel) GetRight() string {
+	return t.right
+}
+
+func (t *tunnel) GetLeft() string {
+	return t.left
+}
+
+func (t *tunnel) randTunnel() (front, right, left string) {
 	randPG := []string{"room", "tunnel"}
-
 	front = randPG[rand.Intn(2)]
 	right = randPG[rand.Intn(2)]
 	left = randPG[rand.Intn(2)]
-
-	fmt.Println(front, right, left)
 	return front, right, left
 }
