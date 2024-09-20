@@ -30,7 +30,7 @@ func Atlas() {
 	for i := 0; i < randomSzam; i++ {
 
 		// a front, right, left változók értékei a tunnel.RandTunnel() értékei lesznek.
-		tunnelInterface := tunnel.New()
+		tunnelInterface := tunnel.New(1, 1)
 
 		// a tunnels tömbhöz hozzáadjuk a front, right, left értékeit.
 		tunnels = append(tunnels, Tunnel{
@@ -93,8 +93,10 @@ func Atlas() {
 }
 */
 
+/*
    [*]
    [*]
 [*][-][*][*]
    [r][*][*][*][*]
 
+*/
